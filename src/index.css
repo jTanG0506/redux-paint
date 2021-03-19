@@ -17,7 +17,6 @@ code {
 @import "~xp.css/dist/XP.css";
 
 canvas {
-  background-color: #fff;
   transform: translate3d(-50%, 0, 0);
   cursor: url(./icons/pencil.png) 0 34, auto;
   margin: 100px 50%;

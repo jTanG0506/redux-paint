@@ -41,7 +41,7 @@ export const ColorPanel = () => {
   };
 
   return (
-    <div className="window colors-panel">
+    <div className="window">
       <div className="title-bar">
         <div className="title-bar-text">Colors</div>
       </div>

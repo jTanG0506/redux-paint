@@ -4,6 +4,8 @@ export const BEGIN_STROKE = "BEGIN_STROKE"
 export const UPDATE_STROKE = "UPDATE_STROKE"
 export const END_STROKE = "END_STROKE"
 export const SET_STROKE_COLOR = "SET_STROKE_COLOR"
+export const UNDO = "UNDO"
+export const REDO = "REDO"
 
 export type Action =
   | {
@@ -21,6 +23,12 @@ export type Action =
     type: typeof SET_STROKE_COLOR,
     payload: string
   }
+  | {
+    type: typeof UNDO,
+  }
+  | {
+    type: typeof REDO,
+  }
 
 export const beginStroke = (x: number, y: number) => {
   return { type: BEGIN_STROKE, payload: { x, y } }
@@ -36,4 +44,12 @@ export const endStroke = () => {
 
 export const setStrokeColor = (color: string) => {
   return { type: SET_STROKE_COLOR, payload: color }
+}
+
+export const undo = () => {
+  return { type: UNDO }
+}
+
+export const redo = () => {
+  return { type: REDO }
 }
