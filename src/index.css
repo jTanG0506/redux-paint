@@ -1,13 +1,107 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #ccc;
+  overflow: hidden;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+@import "~xp.css/dist/XP.css";
+
+canvas {
+  background-color: #fff;
+  transform: translate3d(-50%, 0, 0);
+  cursor: url(./icons/pencil.png) 0 34, auto;
+  margin: 100px 50%;
+}
+
+.color {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf,
+    inset 2px 2px #0a0a0a;
+}
+
+.colors {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 336px;
+}
+
+.edit {
+  position: fixed;
+  bottom: 40px;
+  left: 30%;
+  z-index: 10;
+}
+
+.file {
+  position: fixed;
+  bottom: 40px;
+  right: 20%;
+  z-index: 10;
+}
+
+.control-panel {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  z-index: 10;
+}
+
+.control-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+.save-button {
+  cursor: pointer;
+}
+
+.modal-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  z-index: 10;
+}
+
+.projects-container {
+  overflow: auto;
+  max-width: 600px;
+  height: 400px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 0 10px;
+  width: 600px;
+}
+
+.project-card {
+  width: 100px;
+  height: 100px;
+  margin: 20px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.project-card img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
 }
