@@ -1,16 +1,18 @@
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { undo, redo } from "./actions";
-import { historyIndexSelector, strokesSelector } from "./selectors";
+import { undo, redo } from "./modules/historyIndex/actions";
+import { historyIndexSelector } from "./modules/historyIndex/selectors";
+import { strokesSelector } from "./modules/strokes/selectors";
+import { RootState } from "./types";
 
 export const EditPanel = () => {
   const dispatch = useDispatch();
-  const strokes = useSelector(strokesSelector);
-  const historyIndex = useSelector(historyIndexSelector);
+  const historyIndex = useSelector<RootState, RootState["historyIndex"]>(historyIndexSelector)
+  const strokes = useSelector<RootState, RootState["strokes"]>(strokesSelector)
 
   const handleUndo = useCallback(() => {
-    dispatch(undo());
-  }, [dispatch]);
+    dispatch(undo(strokes.length));
+  }, [dispatch, strokes]);
 
   const handleRedo = useCallback(() => {
     dispatch(redo());

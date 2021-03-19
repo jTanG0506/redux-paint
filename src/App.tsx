@@ -1,23 +1,26 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { beginStroke, endStroke, updateStroke } from "./actions";
 import { clearCanvas, drawStroke, setCanvasSize } from "./canvasUtils";
 import { ColorPanel } from "./ColorPanel";
 import { EditPanel } from "./EditPanel";
 import {
-  currentStrokeSelector,
-  historyIndexSelector,
-  strokesSelector,
-} from "./selectors";
+  beginStroke,
+  endStroke,
+  updateStroke,
+} from "./modules/currentStroke/actions";
+import { currentStrokeSelector } from "./modules/currentStroke/selectors";
+import { historyIndexSelector } from "./modules/historyIndex/selectors";
+import { strokesSelector } from "./modules/strokes/selectors";
+import { RootState } from "./types";
 
 const CANVAS_WIDTH = 1024;
 const CANVAS_HEIGHT = 768;
 
 function App() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const currentStroke = useSelector(currentStrokeSelector);
-  const strokes = useSelector(strokesSelector);
-  const historyIndex = useSelector(historyIndexSelector);
+  const currentStroke = useSelector<RootState, RootState["currentStroke"]>(currentStrokeSelector)
+  const historyIndex = useSelector<RootState, RootState["historyIndex"]>(historyIndexSelector)
+  const strokes = useSelector<RootState, RootState["strokes"]>(strokesSelector)
   const dispatch = useDispatch();
   const isDrawing = !!currentStroke.points.length;
 
@@ -36,6 +39,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    console.log(currentStroke);
     const { context } = getCanvasWithContext();
     if (!context) {
       return;
@@ -68,13 +72,13 @@ function App() {
   const startDrawing = ({
     nativeEvent,
   }: React.MouseEvent<HTMLCanvasElement>) => {
-    const { offsetX, offsetY } = nativeEvent;
-    dispatch(beginStroke(offsetX, offsetY));
+    const { offsetX: x, offsetY: y } = nativeEvent;
+    dispatch(beginStroke({ x, y }));
   };
 
   const endDrawing = () => {
     if (isDrawing) {
-      dispatch(endStroke());
+      dispatch(endStroke({ stroke: currentStroke, historyIndex }));
     }
   };
 
@@ -83,8 +87,8 @@ function App() {
       return;
     }
 
-    const { offsetX, offsetY } = nativeEvent;
-    dispatch(updateStroke(offsetX, offsetY));
+    const { offsetX: x, offsetY: y } = nativeEvent;
+    dispatch(updateStroke({ x, y }));
   };
 
   return (
