@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { undo, redo } from "./modules/historyIndex/actions";
+import { undo, redo } from "./modules/historyIndex/slice";
 import { historyIndexSelector } from "./modules/historyIndex/selectors";
 import { strokesSelector } from "./modules/strokes/selectors";
 import { RootState } from "./types";

@@ -5,9 +5,9 @@ import { ColorPanel } from "./ColorPanel";
 import { EditPanel } from "./EditPanel";
 import {
   beginStroke,
-  endStroke,
   updateStroke,
-} from "./modules/currentStroke/actions";
+} from "./modules/currentStroke/slice";
+import { endStroke } from "./modules/sharedActions";
 import { currentStrokeSelector } from "./modules/currentStroke/selectors";
 import { historyIndexSelector } from "./modules/historyIndex/selectors";
 import { strokesSelector } from "./modules/strokes/selectors";
@@ -18,9 +18,13 @@ const CANVAS_HEIGHT = 768;
 
 function App() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const currentStroke = useSelector<RootState, RootState["currentStroke"]>(currentStrokeSelector)
-  const historyIndex = useSelector<RootState, RootState["historyIndex"]>(historyIndexSelector)
-  const strokes = useSelector<RootState, RootState["strokes"]>(strokesSelector)
+  const currentStroke = useSelector<RootState, RootState["currentStroke"]>(
+    currentStrokeSelector
+  );
+  const historyIndex = useSelector<RootState, RootState["historyIndex"]>(
+    historyIndexSelector
+  );
+  const strokes = useSelector<RootState, RootState["strokes"]>(strokesSelector);
   const dispatch = useDispatch();
   const isDrawing = !!currentStroke.points.length;
 
