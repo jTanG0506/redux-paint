@@ -28,7 +28,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "start:server": "ts-node -O '{\"module\": \"commonjs\"}' ./server/index.ts",
+    "dev": "concurrently --kill-others \"npm run start:server\" \"npm run start\""
   },
   "eslintConfig": {
     "extends": [
@@ -47,5 +49,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.10",
+    "@types/express": "^4.17.11",
+    "@types/lowdb": "^1.0.9",
+    "concurrently": "^6.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "lowdb": "^1.0.0",
+    "nanoid": "^3.1.22",
+    "ts-node": "^9.1.1"
   }
 }
