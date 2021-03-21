@@ -40,14 +40,14 @@ canvas {
 .edit {
   position: fixed;
   bottom: 40px;
-  left: 30%;
+  left: 10%;
   z-index: 10;
 }
 
 .file {
   position: fixed;
   bottom: 40px;
-  right: 20%;
+  right: 10%;
   z-index: 10;
 }
 

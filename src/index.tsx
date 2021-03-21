@@ -3,13 +3,16 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import "./index.css";
 import { store } from "./store";
+import { CanvasProvider } from "./CanvasContext";
+import "./index.css";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <CanvasProvider>
+        <App />
+      </CanvasProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -8,13 +8,7 @@ import { nanoid } from "nanoid"
 let db = lowdb(new FileSync<{ projects: Project[] }>("db.json"))
 
 db.defaults({
-  projects: [
-    {
-      id: nanoid(),
-      name: "Test Project",
-      image: "http://placekitten.com/100/100"
-    }
-  ]
+  projects: []
 }).write()
 
 interface Project {

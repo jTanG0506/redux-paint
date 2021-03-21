@@ -1,12 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { clearCanvas, drawStroke, setCanvasSize } from "./canvasUtils";
+import { ModalLayer } from "./ModalLayer";
+import { FilePanel } from "./FilePanel";
+import { useCanvas } from "./CanvasContext";
 import { ColorPanel } from "./ColorPanel";
 import { EditPanel } from "./EditPanel";
-import {
-  beginStroke,
-  updateStroke,
-} from "./modules/currentStroke/slice";
+import { beginStroke, updateStroke } from "./modules/currentStroke/slice";
 import { endStroke } from "./modules/sharedActions";
 import { currentStrokeSelector } from "./modules/currentStroke/selectors";
 import { historyIndexSelector } from "./modules/historyIndex/selectors";
@@ -17,7 +17,7 @@ const CANVAS_WIDTH = 1024;
 const CANVAS_HEIGHT = 768;
 
 function App() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useCanvas();
   const currentStroke = useSelector<RootState, RootState["currentStroke"]>(
     currentStrokeSelector
   );
@@ -27,6 +27,13 @@ function App() {
   const strokes = useSelector<RootState, RootState["strokes"]>(strokesSelector);
   const dispatch = useDispatch();
   const isDrawing = !!currentStroke.points.length;
+
+  const getCanvasWithContext = useCallback(
+    (canvas = canvasRef.current) => {
+      return { canvas, context: canvas?.getContext("2d") };
+    },
+    [canvasRef]
+  );
 
   useEffect(() => {
     const { canvas, context } = getCanvasWithContext();
@@ -40,10 +47,9 @@ function App() {
     context.lineCap = "round";
     context.lineWidth = 3;
     context.strokeStyle = "black";
-  }, []);
+  }, [getCanvasWithContext]);
 
   useEffect(() => {
-    console.log(currentStroke);
     const { context } = getCanvasWithContext();
     if (!context) {
       return;
@@ -52,7 +58,7 @@ function App() {
     requestAnimationFrame(() =>
       drawStroke(context, currentStroke.points, currentStroke.color)
     );
-  }, [currentStroke]);
+  }, [currentStroke, getCanvasWithContext]);
 
   useEffect(() => {
     const { context, canvas } = getCanvasWithContext();
@@ -67,11 +73,7 @@ function App() {
         drawStroke(context, stroke.points, stroke.color);
       });
     });
-  }, [historyIndex, strokes]);
-
-  const getCanvasWithContext = (canvas = canvasRef.current) => {
-    return { canvas, context: canvas?.getContext("2d") };
-  };
+  }, [getCanvasWithContext, historyIndex, strokes]);
 
   const startDrawing = ({
     nativeEvent,
@@ -105,6 +107,8 @@ function App() {
       </div>
       <EditPanel />
       <ColorPanel />
+      <FilePanel />
+      <ModalLayer />
       <canvas
         ref={canvasRef}
         onMouseDown={startDrawing}
