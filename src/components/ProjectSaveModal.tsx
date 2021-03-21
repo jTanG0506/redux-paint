@@ -1,10 +1,10 @@
 import React, { useState, ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
-import { hide } from "./modules/modals/slice";
-import { useCanvas } from "./CanvasContext";
-import { getCanvasImage } from "./canvasUtils";
-import { getBase64Thumbnail } from "./scalerUtils";
-import { saveProject } from "./modules/strokes/saveProject";
+import { hide } from "../modules/modals/slice";
+import { useCanvas } from "../context/CanvasContext";
+import { getCanvasImage } from "../utils/canvas";
+import { getBase64Thumbnail } from "../utils/scaler";
+import { saveProject } from "../modules/strokes/saveProject";
 
 export const ProjectSaveModal = () => {
   const [projectName, setProjectName] = useState("");

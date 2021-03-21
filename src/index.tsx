@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import { CanvasProvider } from "./context/CanvasContext";
+import { store } from "./store";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { store } from "./store";
-import { CanvasProvider } from "./CanvasContext";
 import "./index.css";
 
 ReactDOM.render(

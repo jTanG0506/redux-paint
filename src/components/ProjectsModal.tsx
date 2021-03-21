@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { hide } from "./modules/modals/slice";
-import { loadProject } from "./modules/strokes/loadProject";
-import { getProjectsList } from "./modules/projectsList/getProjectsList";
-import { projectsListSelector } from "./modules/projectsList/selectors";
+import { hide } from "../modules/modals/slice";
+import { loadProject } from "../modules/strokes/loadProject";
+import { getProjectsList } from "../modules/projectsList/getProjectsList";
+import { projectsListSelector } from "../modules/projectsList/selectors";
 
 export const ProjectsModal = () => {
   const dispatch = useDispatch();

@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useCanvas } from "./CanvasContext";
-import { getCanvasImage } from "./canvasUtils";
-import { show } from "./modules/modals/slice";
 import { saveAs } from "file-saver";
+import { useCanvas } from "../context/CanvasContext";
+import { show } from "../modules/modals/slice";
+import { getCanvasImage } from "../utils/canvas";
 
 export const FilePanel = () => {
   const dispatch = useDispatch();

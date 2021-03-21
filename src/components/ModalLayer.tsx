@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { modalNameSelector } from "./modules/modals/selectors";
+import { modalNameSelector } from "../modules/modals/selectors";
 import { ProjectSaveModal } from "./ProjectSaveModal";
 import { ProjectsModal } from "./ProjectsModal";
 

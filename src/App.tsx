@@ -1,16 +1,16 @@
 import React, { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { clearCanvas, drawStroke, setCanvasSize } from "./canvasUtils";
-import { ModalLayer } from "./ModalLayer";
-import { FilePanel } from "./FilePanel";
-import { useCanvas } from "./CanvasContext";
-import { ColorPanel } from "./ColorPanel";
-import { EditPanel } from "./EditPanel";
+import { useCanvas } from "./context/CanvasContext";
+import { ModalLayer } from "./components/ModalLayer";
+import { FilePanel } from "./components/FilePanel";
+import { ColorPanel } from "./components/ColorPanel";
+import { EditPanel } from "./components/EditPanel";
 import { beginStroke, updateStroke } from "./modules/currentStroke/slice";
 import { endStroke } from "./modules/sharedActions";
 import { currentStrokeSelector } from "./modules/currentStroke/selectors";
 import { historyIndexSelector } from "./modules/historyIndex/selectors";
 import { strokesSelector } from "./modules/strokes/selectors";
+import { clearCanvas, drawStroke, setCanvasSize } from "./utils/canvas";
 import { RootState } from "./types";
 
 const CANVAS_WIDTH = 1024;
